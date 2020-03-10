@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Optreden;
+use App\Repository\OptredenRepository;
 use App\Form\ContactType;
 
 class PublicController extends AbstractController
@@ -18,17 +19,17 @@ class PublicController extends AbstractController
             'controller_name' => 'PublicController',
         ]);
     }
+
     /**
      * @Route("/history", name="history")
+     * @param OptredenRepository $optredenRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function history(){
-        return true;
-    }
-    public function komendeOptredens(){
-        return true;
-    }
-    public function weekOptredens(){
-        return true;
+    public function history(OptredenRepository $optredenRepository)
+    {
+        return $this->render('public/history.html.twig', [
+            'optredens' => $optredenRepository->findAll(),
+        ]);
     }
     /**
      * @Route("/contact", name="controler")
