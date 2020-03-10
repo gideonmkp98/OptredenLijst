@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PublicController!{% endblock %}
+
+{% block body %}
+    <br>
+    <h1 class="display-3 text-center">Komende Optredens</h1>
+    <hr>
+    <div class="row">
+        {% for optreden in optredens %}
+            {% if (optreden.datum > date()) and (optreden.datum < date('+1 day +1 week'))%}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Artiest: {{ optreden.artiest.naam }}</h4>
+                            <p class="card-text">Aantal zitplaatsen {{ optreden.maxSeats }}</p>
+                            <p class="card-text">Zaal {{ optreden.datum | date('m-d-Y')  }} om {{ optreden.aanvang | date('H:i:s') }} </p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+
+    </div>
+{% endblock %}

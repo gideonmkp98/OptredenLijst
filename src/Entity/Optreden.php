@@ -110,4 +110,8 @@ class Optreden
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return (string) $this->datum->format('d-m-Y') . ' ' . $this->aanvang;
+    }
 }
